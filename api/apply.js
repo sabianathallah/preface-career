@@ -5,7 +5,6 @@ export default async function handler(req, res) {
 
   const { name, whatsapp, email, position, location, pitch, portfolio } = req.body
 
-  // debug: check env vars exist
   if (!process.env.SPREADSHEET_ID || !process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
     return res.status(500).json({ error: 'Missing env vars', has: {
       spreadsheet: !!process.env.SPREADSHEET_ID,
@@ -15,11 +14,11 @@ export default async function handler(req, res) {
   }
 
   try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_CLIENT_EMAIL,
-        private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n').trim(),
-      },
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
+
+    const auth = new google.auth.JWT({
+      email: process.env.GOOGLE_CLIENT_EMAIL,
+      key: privateKey,
       scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     })
 
