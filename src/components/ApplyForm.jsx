@@ -34,11 +34,13 @@ export default function ApplyForm({ selectedPosition }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      if (!res.ok) throw new Error('Server error')
+      const data = await res.json()
+      if (!res.ok || data.error) throw new Error(data.error || 'Server error')
       setStatus('success')
-    } catch {
+    } catch (err) {
+      console.error('Submit error:', err)
       setStatus('error')
-      setErrMsg('Something went wrong. Try again or email us directly.')
+      setErrMsg(err.message || 'Something went wrong. Try again or email us directly.')
     }
   }
 
