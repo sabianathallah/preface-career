@@ -739,3 +739,39 @@ transition: background 0.15s ease;
   font-size: 12px; color: rgba(255,255,255,0.2);
   letter-spacing: 0.06em; margin-top: 12px;
 }
+
+/* ─── FILE UPLOAD ────────────────────────────────────────────── */
+.file-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--dim);
+  padding: 12px 0;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  gap: 16px;
+}
+.file-wrap:hover { border-bottom-color: var(--maroon); }
+
+.file-label {
+  font-family: var(--body);
+  font-size: 17px;
+  color: var(--grey);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-label.has-file { color: var(--ink); }
+
+.file-btn {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: var(--maroon);
+  padding: 6px 12px;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.file-wrap:hover .file-btn { background: var(--maroon-h); }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 const ROLES = [
   'Finance Manager','Finance Staff','Marketing Staff','Graphic Designer',
@@ -6,12 +6,15 @@ const ROLES = [
   'Warehouse Staff','Production Staff',
 ]
 
-const EMPTY = { name:'', whatsapp:'', email:'', position:'', location:'', pitch:'', portfolio:'' }
+const EMPTY = { name:'', whatsapp:'', email:'', position:'', location:'', pitch:'' }
+const MAX_FILE_MB = 4
 
 export default function ApplyForm({ selectedPosition }) {
   const [form, setForm]       = useState({ ...EMPTY, position: selectedPosition || '' })
-  const [status, setStatus]   = useState('idle') // idle | loading | success | error
+  const [cvFile, setCvFile]   = useState(null)
+  const [status, setStatus]   = useState('idle')
   const [errMsg, setErrMsg]   = useState('')
+  const fileRef               = useRef()
 
   // sync position from card click
   if (selectedPosition && form.position !== selectedPosition) {
@@ -19,6 +22,18 @@ export default function ApplyForm({ selectedPosition }) {
   }
 
   const set = (field) => (e) => setForm(f => ({ ...f, [field]: e.target.value }))
+
+  const handleFile = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    if (file.size > MAX_FILE_MB * 1024 * 1024) {
+      setErrMsg(`File too large. Max ${MAX_FILE_MB}MB.`)
+      e.target.value = ''
+      return
+    }
+    setErrMsg('')
+    setCvFile(file)
+  }
 
   const handleSubmit = async () => {
     const { name, whatsapp, email, position } = form
@@ -29,11 +44,11 @@ export default function ApplyForm({ selectedPosition }) {
     setErrMsg('')
     setStatus('loading')
     try {
-      const res = await fetch('/api/apply', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
+      const fd = new FormData()
+      Object.entries(form).forEach(([k, v]) => fd.append(k, v))
+      if (cvFile) fd.append('cv', cvFile, cvFile.name)
+
+      const res = await fetch('/api/apply', { method: 'POST', body: fd })
       const data = await res.json()
       if (!res.ok || data.error) throw new Error(data.error || 'Server error')
       setStatus('success')
@@ -117,8 +132,21 @@ export default function ApplyForm({ selectedPosition }) {
             </div>
 
             <div className="form-field full">
-              <label className="form-label" htmlFor="f-port">Portfolio / CV Link</label>
-              <input className="form-input" id="f-port" type="url" placeholder="Google Drive, Notion, Behance, whatever" value={form.portfolio} onChange={set('portfolio')} />
+              <label className="form-label" htmlFor="f-cv">Portfolio / CV</label>
+              <div className="file-wrap" onClick={() => fileRef.current.click()}>
+                <span className={`file-label${cvFile ? ' has-file' : ''}`}>
+                  {cvFile ? cvFile.name : 'Upload PDF, DOCX, or image — max 4MB'}
+                </span>
+                <span className="file-btn">BROWSE</span>
+              </div>
+              <input
+                ref={fileRef}
+                id="f-cv"
+                type="file"
+                accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                style={{ display: 'none' }}
+                onChange={handleFile}
+              />
             </div>
 
           </div>
