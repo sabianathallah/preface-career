@@ -10,12 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const rawKey = process.env.GOOGLE_PRIVATE_KEY
-    const privateKey = rawKey.replace(/\\n/g, '\n')
-
-    console.log('key starts with:', privateKey.substring(0, 40))
-    console.log('has newlines:', privateKey.includes('\n'))
-    console.log('has literal \\n:', privateKey.includes('\\n'))
+    const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
 
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
