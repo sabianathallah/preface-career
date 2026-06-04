@@ -30,7 +30,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ ok: true })
   } catch (err) {
-    console.error('Sheets error:', err)
-    res.status(500).json({ error: 'Failed to save application' })
+    console.error('Sheets error:', err?.message || err)
+    res.status(500).json({ error: err?.message || 'Failed to save application' })
   }
 }
