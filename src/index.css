@@ -59,6 +59,29 @@ body {
 .nav-links  { display: none; }
 .nav-login  { display: none; }
 
+/* mobile login + burger grouped */
+.nav-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* login button visible on mobile navbar */
+.nav-login-mobile {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--maroon);
+  border: none;
+  padding: 7px 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+.nav-login-mobile:hover { background: var(--maroon-h); }
+
 /* hamburger — visible on mobile */
 .nav-burger {
   display: flex;
@@ -107,21 +130,25 @@ body {
 }
 .nav-drawer .nav-link:last-of-type { border-bottom: none; }
 .nav-drawer .nav-link:hover { opacity: 0.3; }
-.nav-drawer .nav-login {
-  display: block;
+.drawer-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   font-family: var(--display);
-  font-size: 26px;
-  letter-spacing: 0.01em;
+  font-size: 20px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
   background: var(--maroon);
-  text-decoration: none;
-  padding: 14px 0;
-  text-align: center;
-  margin-top: 20px;
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 18px 24px;
+  margin-top: 12px;
+  cursor: pointer;
   transition: background 0.15s ease;
 }
-.nav-drawer .nav-login:hover { background: var(--maroon-h); }
+.drawer-login:hover { background: var(--maroon-h); }
 
 /* shared nav-link styles */
 .nav-link {
@@ -635,7 +662,7 @@ align-self: flex-start;
 transition: background 0.15s ease;
   }
   .nav-login:hover { background: var(--maroon-h); }
-  .nav-burger { display: none; }
+  .nav-mobile-actions { display: none; }
 
   .hero { padding: 128px 48px 100px; }
   .scroll-indicator { left: 48px; bottom: 44px; }

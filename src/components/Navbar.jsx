@@ -35,9 +35,12 @@ export default function Navbar() {
 
         <button className="nav-login" onClick={openModal}>Login &rarr;</button>
 
-        <button className="nav-burger" aria-label="Menu" onClick={() => setDrawerOpen(o => !o)}>
-          <span /><span /><span />
-        </button>
+        <div className="nav-mobile-actions">
+          <button className="nav-login-mobile" onClick={openModal}>Login</button>
+          <button className="nav-burger" aria-label="Menu" onClick={() => setDrawerOpen(o => !o)}>
+            <span /><span /><span />
+          </button>
+        </div>
       </nav>
 
       <div className={`nav-drawer${drawerOpen ? ' open' : ''}`}>
