@@ -7,7 +7,7 @@ export default function About() {
     <section className="about" id="about">
       <div className="about-inner">
         <div className="about-grid">
-          <h2 className="about-heading reveal">WHO<br />WE ARE</h2>
+          <h2 className="about-heading reveal">WHO<br />WE <span className="red">ARE</span></h2>
           <p className="about-body reveal reveal-delay-1">
             Preface ain&rsquo;t just a fashion brand. We&rsquo;re building a whole culture &mdash;
             straight outta Bandung, spreading everywhere. We&rsquo;re moving into new lanes

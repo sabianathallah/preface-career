@@ -139,6 +139,7 @@ export default function Positions({ onSelect }) {
               >
                 <div className="pos-card-main" onClick={() => toggleCard(idx)}>
                   <div className="pos-card-body">
+                    <div className="pos-num">{String(idx + 1).padStart(2, '0')}</div>
                     <div className="pos-title">
                       {r.title}
                       {r.urgent && <span className="pos-urgent">URGENT</span>}

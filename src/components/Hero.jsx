@@ -5,7 +5,10 @@ export default function Hero() {
     <section className="hero" id="hero">
       <img className="hero-watermark" src={LOGO} alt="" aria-hidden="true" />
       <div className="hero-content">
-        <div className="hero-tag">★ BANDUNG, ID &mdash; WFO</div>
+        <div className="hero-tag-wrap">
+          <div className="hero-tag">★ BANDUNG, ID &mdash; WFO</div>
+          <span className="hero-tag-sticker">OPEN</span>
+        </div>
         <h1 className="hero-headline">
           <span className="hero-line-1">WE NEED</span>
           <span className="hero-line-2">HEADS.</span>
