@@ -808,7 +808,7 @@ transition: background 0.15s ease;
   border-top: 1px solid var(--dim);
   padding: 20px 20px 24px 18px;
   background: rgba(160,20,30,0.04);
-  animation: expandIn 0.25s cubic-bezier(0.16,1,0.3,1);
+  animation: expandIn 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
   position: relative;
   z-index: 1;
 }
