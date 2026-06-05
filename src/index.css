@@ -781,6 +781,13 @@ transition: background 0.15s ease;
   border-left-color: var(--maroon-h);
 }
 
+.pos-card {
+  padding: 0 !important;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: visible;
+}
+
 .pos-card-main {
   display: flex;
   align-items: center;
@@ -788,12 +795,8 @@ transition: background 0.15s ease;
   gap: 16px;
   cursor: pointer;
   padding: 20px 20px 20px 18px;
-}
-
-.pos-card {
-  padding: 0 !important;
-  flex-direction: column;
-  align-items: stretch;
+  position: relative;
+  z-index: 1;
 }
 
 .pos-arrow--open {
@@ -806,6 +809,8 @@ transition: background 0.15s ease;
   padding: 20px 20px 24px 18px;
   background: rgba(160,20,30,0.04);
   animation: expandIn 0.25s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes expandIn {
@@ -862,6 +867,7 @@ transition: background 0.15s ease;
 .pos-apply-btn:hover { background: var(--maroon-h); }
 
 @media (min-width: 769px) {
+  .pos-card { padding: 0 !important; }
   .pos-card-main { padding: 28px 32px 28px 28px; }
   .pos-detail { padding: 24px 32px 28px 28px; }
   .pos-qual-item { font-size: 16px; }
