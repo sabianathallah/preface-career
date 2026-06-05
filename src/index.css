@@ -776,18 +776,9 @@ transition: background 0.15s ease;
 }
 .file-wrap:hover .file-btn { background: var(--maroon-h); }
 
+
+
 /* ─── POSITION CARD EXPAND ───────────────────────────────────── */
-.pos-card--open {
-  border-left-color: var(--maroon-h);
-}
-
-.pos-card {
-  padding: 0 !important;
-  flex-direction: column;
-  align-items: stretch;
-  overflow: visible;
-}
-
 .pos-card-main {
   display: flex;
   align-items: center;
@@ -797,25 +788,22 @@ transition: background 0.15s ease;
   padding: 20px 20px 20px 18px;
   position: relative;
   z-index: 1;
+  transition: background 0.22s ease;
+}
+.pos-card-main:hover {
+  background: var(--maroon-d);
 }
 
 .pos-arrow--open {
   color: var(--maroon) !important;
-  transform: none !important;
 }
 
 .pos-detail {
   border-top: 1px solid var(--dim);
   padding: 20px 20px 24px 18px;
   background: rgba(160,20,30,0.04);
-  animation: expandIn 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
   position: relative;
   z-index: 1;
-}
-
-@keyframes expandIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 .pos-detail-title {
@@ -849,7 +837,6 @@ transition: background 0.15s ease;
   position: absolute;
   left: 0;
   color: var(--maroon);
-  font-size: 12px;
 }
 
 .pos-apply-btn {
@@ -867,8 +854,7 @@ transition: background 0.15s ease;
 .pos-apply-btn:hover { background: var(--maroon-h); }
 
 @media (min-width: 769px) {
-  .pos-card { padding: 0 !important; }
   .pos-card-main { padding: 28px 32px 28px 28px; }
-  .pos-detail { padding: 24px 32px 28px 28px; }
+  .pos-detail    { padding: 24px 32px 28px 28px; }
   .pos-qual-item { font-size: 16px; }
 }
