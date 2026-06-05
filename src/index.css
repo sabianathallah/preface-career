@@ -775,3 +775,94 @@ transition: background 0.15s ease;
   transition: background 0.15s ease;
 }
 .file-wrap:hover .file-btn { background: var(--maroon-h); }
+
+/* ─── POSITION CARD EXPAND ───────────────────────────────────── */
+.pos-card--open {
+  border-left-color: var(--maroon-h);
+}
+
+.pos-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  padding: 20px 20px 20px 18px;
+}
+
+.pos-card {
+  padding: 0 !important;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pos-arrow--open {
+  color: var(--maroon) !important;
+  transform: none !important;
+}
+
+.pos-detail {
+  border-top: 1px solid var(--dim);
+  padding: 20px 20px 24px 18px;
+  background: rgba(160,20,30,0.04);
+  animation: expandIn 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+@keyframes expandIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pos-detail-title {
+  font-family: var(--body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  margin-bottom: 14px;
+}
+
+.pos-qual-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.pos-qual-item {
+  font-family: var(--body);
+  font-size: 15px;
+  color: var(--grey);
+  line-height: 1.4;
+  padding-left: 16px;
+  position: relative;
+}
+.pos-qual-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--maroon);
+  font-size: 12px;
+}
+
+.pos-apply-btn {
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--maroon);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.pos-apply-btn:hover { background: var(--maroon-h); }
+
+@media (min-width: 769px) {
+  .pos-card-main { padding: 28px 32px 28px 28px; }
+  .pos-detail { padding: 24px 32px 28px 28px; }
+  .pos-qual-item { font-size: 16px; }
+}
