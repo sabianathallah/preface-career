@@ -1,10 +1,21 @@
 import { useReveal } from '../hooks/useReveal'
+import videoBg from '../assets/video-bg.mp4'
 
 export default function About() {
   useReveal()
 
   return (
     <section className="about" id="about">
+      <video
+        className="about-video"
+        src={videoBg}
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden="true"
+      />
+      <div className="about-overlay" aria-hidden="true" />
       <div className="about-inner">
         <div className="about-grid">
           <h2 className="about-heading reveal">WHO<br />WE <span className="red">ARE</span></h2>

@@ -25,3 +25,4 @@ dist-ssr
 .env
 .vercel
 .env*.local
+src/assets/video-bg.mp4
