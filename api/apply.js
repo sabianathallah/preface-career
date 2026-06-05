@@ -1,10 +1,9 @@
 import { google } from 'googleapis'
 import Busboy from 'busboy'
+import { put } from '@vercel/blob'
 import { Readable } from 'stream'
 
 export const config = { api: { bodyParser: false } }
-
-const FOLDER_ID = '1UKvH-zMQ7Ka5CGd60atvW_RGHT8OTiY9'
 
 function parseForm(req) {
   return new Promise((resolve, reject) => {
@@ -28,9 +27,7 @@ function parseForm(req) {
     bb.on('finish', () => resolve({ fields, fileBuffer, fileName, fileMime }))
     bb.on('error', reject)
 
-    // pipe request stream into busboy
-    const readable = Readable.from(req)
-    readable.pipe(bb)
+    Readable.from(req).pipe(bb)
   })
 }
 
@@ -45,42 +42,25 @@ export default async function handler(req, res) {
     const { fields, fileBuffer, fileName, fileMime } = await parseForm(req)
     const { name, whatsapp, email, position, location, pitch } = fields
 
+    // Upload CV to Vercel Blob
+    let cvUrl = ''
+    if (fileBuffer && fileName) {
+      const blob = await put(
+        `cvs/${Date.now()}-${name}-${position}-${fileName}`,
+        fileBuffer,
+        { access: 'public', contentType: fileMime }
+      )
+      cvUrl = blob.url
+    }
+
+    // Save to Google Sheets
     const privateKey = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n')
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
       key: privateKey,
-      scopes: [
-        'https://www.googleapis.com/auth/spreadsheets',
-        'https://www.googleapis.com/auth/drive.file',
-      ],
+      scopes: ['https://www.googleapis.com/auth/spreadsheets'],
     })
 
-    // Upload CV to Google Drive
-    let cvUrl = ''
-    if (fileBuffer && fileName) {
-      const drive = google.drive({ version: 'v3', auth })
-      const uploaded = await drive.files.create({
-        requestBody: {
-          name: `${name} - ${position} - ${fileName}`,
-          parents: [FOLDER_ID],
-        },
-        media: {
-          mimeType: fileMime,
-          body: Readable.from(fileBuffer),
-        },
-        fields: 'id, webViewLink',
-      })
-
-      // Make file viewable by anyone with link
-      await drive.permissions.create({
-        fileId: uploaded.data.id,
-        requestBody: { role: 'reader', type: 'anyone' },
-      })
-
-      cvUrl = uploaded.data.webViewLink
-    }
-
-    // Append to Google Sheets
     const sheets = google.sheets({ version: 'v4', auth })
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SPREADSHEET_ID,
