@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 const ROLES = [
   {
     title: 'Finance Manager',
+    urgent: true,
     desc: 'Run the money across multiple entities — forecasting, KPIs & compliance',
     qualifications: [
       'Min. 3 years experience in finance/accounting, preferably multi-entity',
@@ -14,7 +15,6 @@ const ROLES = [
   },
   {
     title: 'Finance Staff',
-    urgent: true,
     desc: 'Daily bookkeeping, monthly reports, keeping the numbers tight',
     qualifications: [
       'D3/S1 Accounting or related field',
