@@ -1,9 +1,8 @@
 import { useState, useRef } from 'react'
 
 const ROLES = [
-  'Finance Manager','Finance Staff','Marketing Staff','Graphic Designer',
-  'Content Creator','Social Media Specialist','Admin','Operations',
-  'Warehouse Staff','Production Staff',
+  'Finance Manager','Finance Staff','Operation Staff','Marketing Intern',
+  'Admin','Graphic Designer','Production Staff','Warehouse Staff',
 ]
 
 const EMPTY = { name:'', whatsapp:'', email:'', position:'', location:'', pitch:'' }
