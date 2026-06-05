@@ -858,3 +858,15 @@ transition: background 0.15s ease;
   .pos-detail    { padding: 24px 32px 28px 28px; }
   .pos-qual-item { font-size: 16px; }
 }
+
+/* ─── POS-CARD VISIBILITY (React-controlled) ─────────────────── */
+.pos-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.pos-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}

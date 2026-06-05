@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useReveal } from '../hooks/useReveal'
+import { useState, useEffect, useRef } from 'react'
 
 const ROLES = [
   {
@@ -112,8 +111,25 @@ const ROLES = [
 ]
 
 export default function Positions({ onSelect }) {
-  useReveal()
-  const [openIdx, setOpenIdx] = useState(null)
+  const [openIdx, setOpenIdx]     = useState(null)
+  const [visibleSet, setVisible]  = useState(new Set())
+  const gridRef                   = useRef()
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          const idx = Number(e.target.dataset.idx)
+          setVisible(prev => new Set([...prev, idx]))
+          observer.unobserve(e.target)
+        }
+      }),
+      { threshold: 0.08 }
+    )
+    const cards = gridRef.current?.querySelectorAll('[data-idx]') || []
+    cards.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   const toggleCard = (idx) => {
     setOpenIdx(prev => prev === idx ? null : idx)
@@ -129,14 +145,19 @@ export default function Positions({ onSelect }) {
     <section className="positions" id="positions">
       <div className="positions-inner">
         <h2 className="section-title reveal">OPEN POSITIONS</h2>
-        <p className="section-sub reveal reveal-delay-1">
+        <p className="section-sub reveal reveal-delay-1" style={{transitionDelay:'0.1s'}}>
           All roles WFO Bandung. Bag is competitive, based on what you bring.
         </p>
-        <div className="positions-grid">
+        <div className="positions-grid" ref={gridRef}>
           {ROLES.map((r, idx) => {
-            const isOpen = openIdx === idx
+            const isOpen   = openIdx === idx
+            const isVisible = visibleSet.has(idx)
             return (
-              <div key={r.title} className={`pos-card reveal${isOpen ? ' pos-card--open' : ''}`}>
+              <div
+                key={r.title}
+                data-idx={idx}
+                className={`pos-card${isOpen ? ' pos-card--open' : ''}${isVisible ? ' pos-visible' : ' pos-hidden'}`}
+              >
                 <div className="pos-card-main" onClick={() => toggleCard(idx)}>
                   <div className="pos-card-body">
                     <div className="pos-title">{r.title}</div>
