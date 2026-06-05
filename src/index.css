@@ -80,7 +80,7 @@ body {
   white-space: nowrap;
   transition: background 0.15s ease;
 }
-.nav-login-mobile:hover { background: var(--maroon-h); }
+.nav-login-mobile:hover { background: var(--ink); }
 
 /* hamburger — visible on mobile */
 .nav-burger {
@@ -148,7 +148,7 @@ body {
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.drawer-login:hover { background: var(--maroon-h); }
+.drawer-login:hover { background: var(--ink); }
 
 /* shared nav-link styles */
 .nav-link {
@@ -229,8 +229,8 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--maroon);
-  padding: 5px 12px;
+  border: 2px solid var(--maroon);
+  padding: 6px 14px;
   font-family: var(--body);
   font-size: 11px;
   font-weight: 600;
@@ -238,26 +238,23 @@ body {
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: 28px;
-  opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.1s;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both 0.1s;
 }
 
 .hero-headline {
   font-family: var(--display);
-  font-size: clamp(64px, 16vw, 160px);
+  font-size: clamp(56px, 14vw, 160px);
   line-height: 0.88;
   text-transform: uppercase;
   margin-bottom: 28px;
 }
 .hero-line-1 {
   display: block; color: var(--ink);
-  opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.25s;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both 0.25s;
 }
 .hero-line-2 {
   display: block; color: var(--maroon);
-  opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.4s;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both 0.4s;
 }
 
 .hero-sub {
@@ -269,13 +266,20 @@ body {
   color: var(--grey);
   line-height: 1.8;
   max-width: 560px;
-  opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.55s;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both 0.55s;
 }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-tag, .hero-line-1, .hero-line-2, .hero-sub, .scroll-indicator {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .scroll-indicator {
@@ -286,8 +290,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  opacity: 0;
-  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.85s;
+  animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both 0.85s;
 }
 .scroll-label {
   font-family: var(--body);
@@ -421,12 +424,16 @@ body {
 .pos-card::before {
   content: '';
   position: absolute; inset: 0;
-  background: var(--maroon-d);
+  background: var(--ink);
   opacity: 0;
   transition: opacity 0.22s ease;
 }
-.pos-card:hover::before { opacity: 1; }
-.pos-card:hover  { border-left-color: var(--maroon-h); transform: translateX(3px); }
+.pos-card:hover::before { opacity: 0.92; }
+.pos-card:hover  { border-left-color: var(--maroon); transform: translateX(3px); }
+.pos-card:hover .pos-title { color: #fff; }
+.pos-card:hover .pos-desc  { color: rgba(255,255,255,0.55); }
+.pos-card:hover .pos-tag   { color: var(--maroon); border-color: var(--maroon); }
+.pos-card:hover .pos-arrow { color: var(--maroon); transform: translateX(6px); }
 .pos-card-body   { flex: 1; position: relative; z-index: 1; }
 
 .pos-title {
@@ -443,12 +450,15 @@ body {
   line-height: 1.4;
 }
 .pos-tag {
+  display: inline-block;
   font-family: var(--body);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--maroon);
+  border: 1px solid var(--maroon);
+  padding: 2px 7px;
 }
 .pos-arrow {
   font-size: 20px;
@@ -457,7 +467,6 @@ body {
   position: relative; z-index: 1;
   transition: color 0.22s, transform 0.22s;
 }
-.pos-card:hover .pos-arrow { color: var(--maroon); transform: translateX(6px); }
 
 /* ─── APPLY ──────────────────────────────────────────────────── */
 .apply {
@@ -550,8 +559,8 @@ body {
   text-transform: uppercase;
   margin-top: 40px;
 }
-.submit-btn:hover  { background: var(--maroon-h); }
-.submit-btn:active { background: #8b1019; }
+.submit-btn:hover  { background: var(--ink); }
+.submit-btn:active { background: #000; }
 
 .form-note {
   font-family: var(--body); font-size: 13px;
@@ -661,7 +670,7 @@ flex-shrink: 0;
 align-self: flex-start;
 transition: background 0.15s ease;
   }
-  .nav-login:hover { background: var(--maroon-h); }
+  .nav-login:hover { background: var(--ink); }
   .nav-mobile-actions { display: none; }
 
   .hero { padding: 128px 48px 100px; }
@@ -878,7 +887,7 @@ transition: background 0.15s ease;
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.pos-apply-btn:hover { background: var(--maroon-h); }
+.pos-apply-btn:hover { background: var(--ink); }
 
 @media (min-width: 769px) {
   .pos-card-main { padding: 28px 32px 28px 28px; }
