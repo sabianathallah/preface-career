@@ -669,7 +669,7 @@ transition: background 0.15s ease;
   display: none;
   position: fixed; inset: 0;
   z-index: 2000;
-  background: rgba(10,8,7,0.78);
+  background: rgba(244,240,232,0.75);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   align-items: center; justify-content: center;
@@ -678,8 +678,8 @@ transition: background 0.15s ease;
 .sys-overlay.show { display: flex; }
 
 .sys-modal {
-  background: #1A1714;
-  border: 1px solid rgba(160,20,30,0.35);
+  background: #ffffff;
+  border: 1px solid rgba(160,20,30,0.25);
   border-top: 3px solid #A0141E;
   width: 100%; max-width: 420px;
   padding: 40px 28px 32px;
@@ -693,11 +693,11 @@ transition: background 0.15s ease;
 .sys-modal-close {
   position: absolute; top: 14px; right: 16px;
   background: none; border: none;
-  color: rgba(255,255,255,0.3);
+  color: rgba(0,0,0,0.25);
   font-size: 18px; cursor: pointer; padding: 4px;
   transition: color 0.15s;
 }
-.sys-modal-close:hover { color: rgba(255,255,255,0.7); }
+.sys-modal-close:hover { color: rgba(0,0,0,0.6); }
 
 .sys-modal-lock {
   width: 48px; height: 48px;
@@ -715,13 +715,13 @@ transition: background 0.15s ease;
 }
 .sys-modal-title {
   font-family: 'Archivo Black', sans-serif;
-  font-size: 26px; color: #fff;
+  font-size: 26px; color: #1A1714;
   text-transform: uppercase; line-height: 1;
   margin-bottom: 12px;
 }
 .sys-modal-body {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px; color: rgba(255,255,255,0.45);
+  font-size: 15px; color: rgba(26,23,20,0.55);
   line-height: 1.6; margin-bottom: 28px; letter-spacing: 0.03em;
 }
 .sys-modal-btn {
