@@ -870,3 +870,25 @@ transition: background 0.15s ease;
   transform: translateY(0);
   transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
 }
+
+/* ─── URGENT CARD ────────────────────────────────────────────── */
+.pos-urgent {
+  display: inline-block;
+  font-family: var(--body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--maroon);
+  padding: 2px 8px;
+  margin-left: 10px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.pos-card--urgent {
+  border-left-width: 4px;
+  background: rgba(160,20,30,0.03);
+}

@@ -14,6 +14,7 @@ const ROLES = [
   },
   {
     title: 'Finance Staff',
+    urgent: true,
     desc: 'Daily bookkeeping, monthly reports, keeping the numbers tight',
     qualifications: [
       'D3/S1 Accounting or related field',
@@ -134,11 +135,14 @@ export default function Positions({ onSelect }) {
               <div
                 key={r.title}
                 data-idx={idx}
-                className={`pos-card${isOpen ? ' pos-card--open' : ''}${isVisible ? ' pos-visible' : ' pos-hidden'}`}
+                className={`pos-card${isOpen ? ' pos-card--open' : ''}${isVisible ? ' pos-visible' : ' pos-hidden'}${r.urgent ? ' pos-card--urgent' : ''}`}
               >
                 <div className="pos-card-main" onClick={() => toggleCard(idx)}>
                   <div className="pos-card-body">
-                    <div className="pos-title">{r.title}</div>
+                    <div className="pos-title">
+                      {r.title}
+                      {r.urgent && <span className="pos-urgent">URGENT</span>}
+                    </div>
                     <div className="pos-desc">{r.desc}</div>
                     <div className="pos-tag">FULL TIME &middot; BANDUNG</div>
                   </div>
